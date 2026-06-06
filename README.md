@@ -1,9 +1,4 @@
-# SnapReport 🏠
-
-> **AI-powered real estate market report generator for agents**  
-> Built for the Snaphomz Real Estate AI Hackathon
-
----
+# SnapReport 
 
 ## What It Does
 
@@ -14,17 +9,6 @@
 5. Generates a **branded PDF report** (SnapReport + Snaphomz)
 6. Frontend displays stats cards + AI summary + PDF download button
 
----
-
-## Data Sources
-
-| Source | Description |
-|--------|-------------|
-| `redfin_housing_market_monthly_all_country_key_metrics_2020_Jan_to_2026_Apr.csv` | Monthly national metrics — primary baseline |
-| `redfin_housing_market_monthly_all_country_key_metrics_2026_Jan_to_2026_Apr.csv` | Latest 4 months snapshot |
-| `redfin_housing_market_weekly_all_country_key_metrics_2019_Jan_to_2026_May.csv` | Weekly granularity data |
-
----
 
 ## Tech Stack
 
@@ -37,7 +21,6 @@
 | PDF | ReportLab |
 | Data | Redfin CSV + local variance |
 
----
 
 ## Quick Start
 
@@ -75,7 +58,7 @@ npm run dev
 ## Project Structure
 
 ```
-snap_homz_report/
+Snap-Report/
 │
 ├── redfin_housing_market_monthly_*.csv   ← Real Redfin data files
 ├── redfin_housing_market_weekly_*.csv
@@ -99,7 +82,36 @@ snap_homz_report/
     └── package.json
 ```
 
----
+
+
+## Architecture
+
+```
+Browser (React/Vite :5173)
+    │  POST /generate-report
+    ▼
+FastAPI (:8000)
+    ├── data_loader.py  ← reads real Redfin CSV → local variance
+    ├── Groq API        ← llama-3.3-70b-versatile
+    └── pdf_generator.py → saves branded PDF
+         │
+         └── /reports/{filename} (static)
+    ▼
+Browser downloads PDF
+```
+
+
+## Data Sources
+
+| Source | Description |
+|--------|-------------|
+| `redfin_housing_market_monthly_all_country_key_metrics_2020_Jan_to_2026_Apr.csv` | Monthly national metrics — primary baseline |
+| `redfin_housing_market_monthly_all_country_key_metrics_2026_Jan_to_2026_Apr.csv` | Latest 4 months snapshot |
+| `redfin_housing_market_weekly_all_country_key_metrics_2019_Jan_to_2026_May.csv` | Weekly granularity data |
+
+
+
+
 
 ## API
 
@@ -131,33 +143,3 @@ snap_homz_report/
 ### `GET /health`
 Returns server status + Groq configuration check.
 
----
-
-## Architecture
-
-```
-Browser (React/Vite :5173)
-    │  POST /generate-report
-    ▼
-FastAPI (:8000)
-    ├── data_loader.py  ← reads real Redfin CSV → local variance
-    ├── Groq API        ← llama-3.3-70b-versatile
-    └── pdf_generator.py → saves branded PDF
-         │
-         └── /reports/{filename} (static)
-    ▼
-Browser downloads PDF
-```
-
----
-
-## Hackathon Context
-
-**Judged on:** working demo · product thinking · scope management · business value
-
-**Key decisions:**
-- Real Redfin data (not pure mock) → credibility for judges
-- Zip-seeded variance → different reports per market, still consistent
-- Groq (not OpenAI) → free tier, fast inference, llama-3.3-70b quality
-- ReportLab → zero dependencies, professional PDF output
-- Plain CSS → no Tailwind lock-in, fast iteration
