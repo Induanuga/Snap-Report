@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import ReportResults from './components/ReportResults'
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 // Loading steps to display while generating report
 const LOADING_STEPS = [
