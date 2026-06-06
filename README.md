@@ -2,12 +2,11 @@
 
 ## What It Does
 
-1. Agent enters their name, email, and target zip code / area
-2. Backend loads **real Redfin national housing data** (Apr 2026)
-3. Applies local market variance per zip code
-4. Calls **Groq LLM** (llama-3.3-70b) to write a professional market narrative
-5. Generates a **branded PDF report** (SnapReport + Snaphomz)
-6. Frontend displays stats cards + AI summary + PDF download button
+- Agent enters their name, email, and target zip code / area
+- Applies local market variance per zip code
+- Calls **Groq LLM** (llama-3.3-70b) to write a professional market narrative
+- Generates a **branded PDF report** (SnapReport + Snaphomz)
+- Frontend displays stats cards + AI summary + PDF download button
 
 
 ## Tech Stack
