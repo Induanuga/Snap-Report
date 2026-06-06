@@ -52,7 +52,6 @@ npm run dev
 ### 5. Open the App
 → http://localhost:5173
 
----
 
 ## Project Structure
 
@@ -98,17 +97,6 @@ FastAPI (:8000)
     ▼
 Browser downloads PDF
 ```
-
-
-## Data Sources
-
-| Source | Description |
-|--------|-------------|
-| `redfin_housing_market_monthly_all_country_key_metrics_2020_Jan_to_2026_Apr.csv` | Monthly national metrics — primary baseline |
-| `redfin_housing_market_monthly_all_country_key_metrics_2026_Jan_to_2026_Apr.csv` | Latest 4 months snapshot |
-| `redfin_housing_market_weekly_all_country_key_metrics_2019_Jan_to_2026_May.csv` | Weekly granularity data |
-
-
 
 
 
